@@ -1,27 +1,32 @@
-import BLOG from '@/blog.config'
+import Badge from '@/components/Badge'
+import NotionIcon from '@/components/NotionIcon'
+import { siteConfig } from '@/lib/config'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
 
 const BlogPostCard = ({ post, className }) => {
   const router = useRouter()
-  const currentSelected = router.asPath.split('?')[0] === '/' + post.slug
-  return (
-        <div key={post.id} className="py-0.5">
-            <div className="flex flex-col w-full">
-                <Link
-                    href={`${BLOG.SUB_PATH}/${post.slug}`}
-                    passHref
-                    className={
-                        `${className} ${currentSelected ? 'bg-gray-500 text-white font-bold' : 'text-gray-700 dark:text-gray-300 '} pl-1 hover:font-bold py-0.5 cursor-pointer`
-                    }>
-                    <div>
-                        {post.title}
-                    </div>
+  const currentSelected =
+    decodeURIComponent(router.asPath.split('?')[0]) === post?.href
 
-                </Link>
-            </div>
+  return (
+    <Link href={post?.href} passHref>
+      <div
+        key={post.id}
+        className={`${className} relative py-1.5 cursor-pointer px-1.5 rounded-md hover:bg-gray-50
+                    ${currentSelected ? 'text-green-500 dark:bg-yellow-100 dark:text-yellow-600 font-semibold' : ' dark:hover:bg-yellow-100 dark:hover:text-yellow-600'}`}>
+        <div className='w-full select-none'>
+          {siteConfig('POST_TITLE_ICON') && (
+            <NotionIcon icon={post?.pageIcon} />
+          )}{' '}
+          {post.title}
         </div>
+        {/* 最新文章加个红点 */}
+        {post?.isLatest && siteConfig('GITBOOK_LATEST_POST_RED_BADGE') && (
+          <Badge />
+        )}
+      </div>
+    </Link>
   )
 }
 

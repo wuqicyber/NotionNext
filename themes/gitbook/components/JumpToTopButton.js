@@ -1,7 +1,3 @@
-import { useGlobal } from '@/lib/global'
-import React from 'react'
-import CONFIG_GITBOOK from '../config_gitbook'
-
 /**
  * 跳转到网页顶部
  * 当屏幕下滑500像素后会出现该控件
@@ -11,16 +7,22 @@ import CONFIG_GITBOOK from '../config_gitbook'
  * @constructor
  */
 const JumpToTopButton = ({ showPercent = false, percent, className }) => {
-  const { locale } = useGlobal()
-  if (!CONFIG_GITBOOK.WIDGET_TO_TOP) {
-    return <></>
-  }
-  return (<div className={'flex space-x-1 items-center cursor-pointer w-full justify-center ' + className } onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} >
-        <div title={locale.POST.TOP} >
-          <i className='fas fa-arrow-up'/>
-        </div>
-        {showPercent && (<div className='text-xs dark:text-gray-200 block lg:hidden'>{percent}%</div>)}
-    </div>)
+  return (
+    <div
+      id='jump-to-top'
+      data-aos='fade-up'
+      data-aos-duration='300'
+      data-aos-once='false'
+      data-aos-anchor-placement='top-center'
+      className='fixed xl:right-96 xl:mr-20 right-2 bottom-24 z-20'>
+      <i
+        className='shadow fas fa-chevron-up cursor-pointer p-2 rounded-full border bg-white dark:bg-hexo-black-gray'
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+      />
+    </div>
+  )
 }
 
 export default JumpToTopButton
