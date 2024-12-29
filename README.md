@@ -4,7 +4,7 @@
 
 ![docs/readwise.png](docs/readwise.png)
 
-使用时需要设置`READWISE_API_KEY`，目前仅对主题'hexo'有效，其他主题也可以很方便集成。
+使用时需要设置`NEXT_PUBLIC_READWISE_API_KEY`，目前仅对主题'hexo'有效，其他主题也可以很方便集成。
 
 # 帮助教程
 访问帮助：
