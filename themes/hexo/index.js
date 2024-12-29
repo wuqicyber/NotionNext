@@ -33,6 +33,12 @@ import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
+import BLOG from '@/blog.config'
+
+// 动态导入 ReadwiseModal
+const ReadwiseModal = dynamic(() => import('@/components/ReadwiseModal'), {
+  ssr: false
+})
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -84,6 +90,8 @@ const LayoutBase = props => {
 
   // Algolia搜索框
   const searchModal = useRef(null)
+
+  console.log('HexoTheme config:', BLOG.READWISE_ENABLED)
 
   return (
     <ThemeGlobalHexo.Provider value={{ searchModal }}>
@@ -157,6 +165,9 @@ const LayoutBase = props => {
 
         {/* 页脚 */}
         <Footer title={siteConfig('TITLE')} />
+
+        {/* 添加 ReadwiseModal */}
+        {BLOG.READWISE_ENABLED && <ReadwiseModal />}
       </div>
     </ThemeGlobalHexo.Provider>
   )
