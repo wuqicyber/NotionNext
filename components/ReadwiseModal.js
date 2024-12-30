@@ -119,11 +119,11 @@ const ReadwiseModal = () => {
     }
     // 这里可以随机 or 顺序
     // （1）顺序：
-    // setCurrentIndex((prev) => (prev + 1) % highlights.length)
+    setCurrentIndex((prev) => (prev + 1) % highlights.length)
 
     // （2）随机：
-    const randomIndex = Math.floor(Math.random() * highlights.length)
-    setCurrentIndex(randomIndex)
+    // const randomIndex = Math.floor(Math.random() * highlights.length)
+    // setCurrentIndex(randomIndex)
   }
 
   // 当前展示的那一条
